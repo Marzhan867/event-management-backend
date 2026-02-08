@@ -56,15 +56,10 @@ const normalizeEventBody = (req, res, next) => {
   next();
 };
 
-// get all events
 router.get("/", getEvents);
 
-// get single event by id
 router.get("/:id", getEventById);
 
-
-// CREATE EVENT
-// only organizer or admin can create events
 router.post(
   "/",
   authMiddleware,
@@ -75,26 +70,18 @@ router.post(
   createEvent
 );
 
-// REGISTER FOR EVENT
-// any authenticated user
 router.post(
   "/:id/register",
   authMiddleware,
   registerForEvent
 );
 
-// IMPORT EXTERNAL EVENT
-
-// IMPORT EXTERNAL EVENT + REGISTER
-// UNREGISTER FROM EVENT 
 router.delete(
   "/:id/register",
   authMiddleware,
   unregisterFromEvent
 );
 
-// DELETE EVENT
-// only organizer/admin and owner
 router.delete(
   "/:id",
   authMiddleware,

@@ -4,7 +4,6 @@ exports.getProfile = (req, res) => {
 
 const Event = require("../models/Event");
 
-// GET MY REGISTERED EVENTS
 exports.getMyEvents = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -21,7 +20,6 @@ exports.getMyEvents = async (req, res) => {
   }
 };
 
-// GET EVENTS CREATED BY ME (ORGANIZER)
 exports.getCreatedEvents = async (req, res) => {
   try {
     const events = await Event.find({ createdBy: req.user._id })
@@ -35,7 +33,6 @@ exports.getCreatedEvents = async (req, res) => {
 
 const User = require("../models/user");
 
-// ADD TO FAVORITES
 exports.addToFavorites = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
@@ -54,7 +51,6 @@ exports.addToFavorites = async (req, res) => {
   }
 };
 
-// REMOVE FROM FAVORITES
 exports.removeFromFavorites = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
@@ -71,7 +67,6 @@ exports.removeFromFavorites = async (req, res) => {
   }
 };
 
-// GET FAVORITES
 exports.getFavorites = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).populate("favorites");

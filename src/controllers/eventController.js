@@ -2,16 +2,10 @@ const Event = require("../models/Event");
 const User = require("../models/user");
 const { sendEmail } = require("../services/emailService");
 
-/**
- * Helper: build Mapbox map URL
- */
 const buildMapUrl = (lat, lng) => {
   return `https://www.google.com/maps?q=${lat},${lng}`;
 };
 
-// =========================
-// CREATE EVENT
-// =========================
 exports.createEvent = async (req, res) => {
   try {
     const {
@@ -24,7 +18,6 @@ exports.createEvent = async (req, res) => {
       capacity
     } = req.body;
 
-    // build map url safely INSIDE request
     const mapUrl = buildMapUrl(
       location.coordinates.lat,
       location.coordinates.lng
@@ -56,9 +49,6 @@ exports.createEvent = async (req, res) => {
   }
 };
 
-// =========================
-// GET ALL EVENTS (PUBLIC)
-// =========================
 exports.getEvents = async (req, res) => {
   try {
     const events = await Event.find()
@@ -71,9 +61,6 @@ exports.getEvents = async (req, res) => {
   }
 };
 
-// =========================
-// GET SINGLE EVENT (DETAILS)
-// =========================
 exports.getEventById = async (req, res) => {
   try {
     const event = await Event.findById(req.params.id)
@@ -90,9 +77,6 @@ exports.getEventById = async (req, res) => {
   }
 };
 
-// =========================
-// REGISTER FOR EVENT
-// =========================
 exports.registerForEvent = async (req, res) => {
   try {
     const eventId = req.params.id;
@@ -103,12 +87,10 @@ exports.registerForEvent = async (req, res) => {
       return res.status(404).json({ message: "Event not found" });
     }
 
-    // capacity check
     if (event.participants.length >= event.capacity) {
       return res.status(400).json({ message: "Event is full" });
     }
 
-    // already registered check
     const alreadyRegistered = event.participants.some(
       (p) => p.user.toString() === userId.toString()
     );
@@ -122,7 +104,6 @@ exports.registerForEvent = async (req, res) => {
 
     const user = await User.findById(userId);
 
-    // SEND CONFIRMATION EMAIL
     await sendEmail({
       to: user.email,
       subject: "Event Registration Confirmation",
@@ -142,9 +123,6 @@ exports.registerForEvent = async (req, res) => {
   }
 };
 
-// =========================
-// UNREGISTER FROM EVENT
-// =========================
 exports.unregisterFromEvent = async (req, res) => {
   try {
     const eventId = req.params.id;
@@ -167,17 +145,6 @@ exports.unregisterFromEvent = async (req, res) => {
   }
 };
 
-// =========================
-// IMPORT EXTERNAL EVENT
-// =========================
-
-// =========================
-// IMPORT EXTERNAL EVENT + REGISTER
-// =========================
-
-// =========================
-// DELETE EVENT (ORGANIZER/ADMIN)
-// =========================
 exports.deleteEvent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);

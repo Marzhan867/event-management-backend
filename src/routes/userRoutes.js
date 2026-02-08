@@ -15,7 +15,6 @@ router.get("/profile", authMiddleware, getProfile);
 router.get("/my-events", authMiddleware, getMyEvents);
 router.get("/created-events", authMiddleware, getCreatedEvents);
 
-// FAVORITES ❤️
 router.post("/favorites/:id", authMiddleware, addToFavorites);
 router.delete("/favorites/:id", authMiddleware, removeFromFavorites);
 router.get("/favorites", authMiddleware, getFavorites);

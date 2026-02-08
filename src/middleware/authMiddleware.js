@@ -20,10 +20,10 @@ const authMiddleware = async (req, res, next) => {
       throw new ApiError(401, "User not found");
     }
 
-    req.user = user; // ⬅️ МАҢЫЗДЫ (role осында)
+    req.user = user; 
     next();
   } catch (error) {
-    next(error); // ⬅️ errorMiddleware-ке жібереді
+    next(error); 
   }
 };
 

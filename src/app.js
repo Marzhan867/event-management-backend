@@ -41,8 +41,6 @@ app.use((req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
 
-
-
 app.use(errorMiddleware);
 
 module.exports = app;

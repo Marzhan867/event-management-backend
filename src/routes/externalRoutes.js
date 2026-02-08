@@ -61,7 +61,6 @@ router.get("/ticketmaster", async (req, res) => {
   }
 });
 
-// IMPORT TICKETMASTER EVENTS INTO DB
 router.post(
   "/ticketmaster/import",
   authMiddleware,

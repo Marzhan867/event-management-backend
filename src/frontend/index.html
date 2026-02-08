@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EventFlow — Events & Tickets</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="logo">
+        <span class="logo-mark">EF</span>
+        <div>
+          <strong>EventFlow</strong>
+          <small>Tickets & Experiences</small>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#featured">Tickets & Events</a>
+        <a href="#calendar">Calendar</a>
+        
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="login.html#register" class="btn btn-ghost">Register</a>
+        <a href="create-event.html" class="btn btn-ghost" id="navCreateEvent">Create Event</a>
+        <a href="profile.html" class="btn btn-ghost" id="navProfile">Profile</a>
+        <button class="btn btn-outline" type="button" data-action="logout" id="navLogout">Logout</button>
+        <button class="btn btn-outline" type="button" data-action="scroll-footer">Contact</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-backdrop"></div>
+        <div class="hero-content">
+          <span class="eyebrow">Live theatre season</span>
+          <h1>June 27th – July 4th</h1>
+          <p>
+            Curated theatre, music, and community gatherings. Discover standout shows,
+            reserve seats, and track every detail in one place.
+          </p>
+          <div class="hero-actions">
+          <button class="btn btn-ghost" type="button" data-action="schedule">View Schedule</button>
+          </div>
+        </div>
+
+        <div class="hero-card" id="heroCard">
+          <div class="hero-card-header">
+            <span class="pill">Featured Tonight</span>
+            <span class="card-date" id="heroDate">—</span>
+          </div>
+          <h3 id="heroTitle">Loading event...</h3>
+          <p id="heroSubtitle">Please wait while we fetch upcoming events.</p>
+          <div class="hero-card-meta">
+            <div>
+              <small>City</small>
+              <strong id="heroCity">—</strong>
+            </div>
+            <div>
+              <small>Price</small>
+              <strong id="heroPrice">—</strong>
+            </div>
+          </div>
+          <div class="hero-card-actions">
+            <button class="btn btn-primary" type="button" data-action="details">View Details</button>
+            <button class="btn btn-ghost" type="button" data-action="favorite">Add to Favorites</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="featured" class="featured">
+        <div class="section-heading">
+          <h2>Featured Upcoming Events</h2>
+          <p>Stay ahead with the latest highlights and handpicked experiences.</p>
+        </div>
+        <div class="filters">
+          <input id="search" type="text" placeholder="Search by title or city" />
+          <button class="btn btn-ghost filter-toggle" type="button" id="toggleFeatured">›</button>
+          <select id="typeFilter">
+            <option value="all">All types</option>
+            <option value="concert">Concert</option>
+            <option value="conference">Conference</option>
+            <option value="workshop">Workshop</option>
+            <option value="meetup">Meetup</option>
+            <option value="party">Party</option>
+            <option value="event">Other</option>
+          </select>
+          <select id="priceFilter">
+            <option value="all">Any price</option>
+            <option value="free">Free</option>
+            <option value="under50">Under $50</option>
+            <option value="under150">Under $150</option>
+          </select>
+        </div>
+        <div class="featured-grid">
+          <div class="featured-list" id="featuredList"></div>
+          <aside class="featured-panel">
+            <h3>Event Calendar</h3>
+            <p>Track key dates across your city and reserve seats fast.</p>
+            <div class="calendar-card calendar-full">
+              <div class="calendar-row">
+                <button class="calendar-nav" type="button" data-action="prev-month-sidebar">‹</button>
+                <div class="calendar-title">
+                  <span id="calendarMonth">June</span>
+                  <strong id="calendarYear">2026</strong>
+                </div>
+                <button class="calendar-nav" type="button" data-action="next-month-sidebar">›</button>
+              </div>
+              <div class="calendar-dates calendar-grid" id="calendarDates"></div>
+              <div class="calendar-cta">
+                <button class="btn btn-primary" type="button" data-action="calendar">View Full Calendar</button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="calendar" class="calendar-section">
+        <div class="section-heading">
+          <h2>Event Calendar</h2>
+          <p>Explore what is next and keep your audience engaged all season.</p>
+        </div>
+        <div class="calendar-controls">
+          <button class="calendar-nav" type="button" data-action="prev-month-strip">‹</button>
+          <div class="calendar-title">
+            <span id="calendarStripMonth">Month</span>
+            <strong id="calendarStripYear">Year</strong>
+          </div>
+          <button class="calendar-nav" type="button" data-action="next-month-strip">›</button>
+        </div>
+        <button class="btn btn-ghost" id="toggleCalendar">Show all</button>
+        <div class="calendar-strip" id="calendarStrip"></div>
+      </section>
+    </main>
+
+    <div class="modal" id="eventModal" aria-hidden="true">
+      <div class="modal-content" role="dialog" aria-modal="true">
+        <button class="modal-close" type="button" aria-label="Close" data-action="close-modal">×</button>
+        <h3 id="modalTitle">Event Title</h3>
+        <p id="modalDescription">Event description</p>
+        <div class="modal-meta">
+          <span id="modalDate">Date</span>
+          <span id="modalCity">City</span>
+          <span id="modalPrice">Price</span>
+        </div>
+        <div class="modal-actions">
+          <a class="btn btn-outline" id="modalMap" href="#" target="_blank" rel="noopener">Open Map</a>
+          <button class="btn btn-primary" type="button" data-action="tickets">Get Tickets</button>
+          <button class="btn btn-outline" type="button" data-action="close-modal">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="paymentModal" aria-hidden="true">
+      <div class="modal-content" role="dialog" aria-modal="true">
+        <button class="modal-close" type="button" aria-label="Close" data-action="close-payment">×</button>
+        <h3 id="paymentTitle">Checkout</h3>
+        <p id="paymentDescription">Secure checkout for your ticket.</p>
+        <div class="modal-meta">
+          <span id="paymentEvent">Event</span>
+          <span id="paymentAmount">Amount</span>
+        </div>
+        <form id="paymentForm" class="payment-form">
+          <div>
+            <label for="cardName">Cardholder Name</label>
+            <input id="cardName" name="cardName" type="text" placeholder="Jane Cooper" required />
+          </div>
+          <div>
+            <label for="cardNumber">Card Number</label>
+            <input id="cardNumber" name="cardNumber" type="text" inputmode="numeric" placeholder="1234 5678 9012 3456" required />
+          </div>
+          <div class="payment-row">
+            <div>
+              <label for="cardExpiry">Expiry</label>
+              <input id="cardExpiry" name="cardExpiry" type="text" placeholder="MM/YY" required />
+            </div>
+            <div>
+              <label for="cardCvc">CVC</label>
+              <input id="cardCvc" name="cardCvc" type="password" inputmode="numeric" placeholder="123" required />
+            </div>
+          </div>
+        </form>
+        <div class="modal-actions">
+          <button class="btn btn-primary" type="button" data-action="pay-now">Pay Now</button>
+          <button class="btn btn-outline" type="button" data-action="close-payment">Cancel</button>
+        </div>
+        <small class="payment-note">Demo checkout. No real payment is processed.</small>
+      </div>
+    </div>
+
+    <div class="modal" id="contactModal" aria-hidden="true">
+      <div class="modal-content" role="dialog" aria-modal="true">
+        <button class="modal-close" type="button" aria-label="Close" data-action="close-contact">×</button>
+        <h3>Contact us</h3>
+        <form id="contactForm" class="payment-form">
+          <div>
+            <label for="contactName">Name</label>
+            <input id="contactName" name="name" type="text" required />
+          </div>
+          <div>
+            <label for="contactEmail">Email</label>
+            <input id="contactEmail" name="email" type="email" required />
+          </div>
+          <div>
+            <label for="contactMessage">Message</label>
+            <input id="contactMessage" name="message" type="text" required />
+          </div>
+        </form>
+        <div class="modal-actions">
+          <button class="btn btn-primary" type="button" data-action="send-contact">Send</button>
+          <button class="btn btn-outline" type="button" data-action="close-contact">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" aria-hidden="true">
+      <div class="toast-content">
+        <strong id="toastTitle">Success</strong>
+        <p id="toastMessage">Payment completed.</p>
+      </div>
+      <button class="toast-close" type="button" aria-label="Close notification">×</button>
+    </div>
+
+    <footer class="site-footer" id="footer">
+      <div>
+        <strong>EventFlow</strong>
+        <p>Curated events, tickets, and real-time updates.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#featured">Events</a>
+        <a href="#calendar">Calendar</a>
+        <a href="profile.html">Profile</a>
+        <a href="login.html">Login</a>
+      </div>
+      <div class="footer-actions">
+        <button class="btn btn-outline" type="button" data-action="contact">Contact</button>
+        <small>tolendiyevamarzhan@gmail.com</small>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

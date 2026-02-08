@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EventFlow — Profile</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="profile-page">
+    <a class="btn btn-outline" href="index.html">← Back to events</a>
+    <div class="profile-card">
+      <h1>Profile</h1>
+      <p id="profileName">Name: —</p>
+      <p id="profileEmail">Email: —</p>
+      <p id="profileRole">Role: —</p>
+    </div>
+
+    <div>
+      <h2>Favorites</h2>
+      <div class="favorites-grid" id="favoritesGrid"></div>
+      <p class="auth-message" id="favoritesMessage"></p>
+    </div>
+
+    <div>
+      <h2>My Created Events</h2>
+      <button class="btn btn-ghost" id="toggleCreated">Show all</button>
+      <div class="favorites-grid" id="createdGrid"></div>
+      <p class="auth-message" id="createdMessage"></p>
+    </div>
+
+    <div>
+      <h2>My Events</h2>
+      <div class="favorites-grid" id="myEventsGrid"></div>
+      <p class="auth-message" id="myEventsMessage"></p>
+    </div>
+  </div>
+
+  <script src="js/profile.js"></script>
+</body>
+</html>

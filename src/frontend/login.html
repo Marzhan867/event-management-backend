@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EventFlow — Login</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-card">
+    <div class="auth-switch">
+      <button class="btn btn-outline" type="button" data-tab="login">Login</button>
+      <button class="btn btn-ghost" type="button" data-tab="register">Register</button>
+    </div>
+
+    <form id="loginForm">
+      <h1>Welcome back</h1>
+      <div>
+        <label>Email</label>
+        <input type="email" name="email" required />
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" name="password" required />
+      </div>
+      <div class="auth-actions">
+        <button class="btn btn-primary" type="submit">Login</button>
+        <a class="btn btn-ghost" href="index.html">Back to site</a>
+      </div>
+      <p class="auth-message" id="loginMessage"></p>
+    </form>
+
+    <form id="registerForm" hidden>
+      <h1>Create account</h1>
+      <div>
+        <label>Account Type</label>
+        <select name="role" required>
+          <option value="user">User</option>
+          <option value="organizer">Organizer</option>
+        </select>
+      </div>
+      <div>
+        <label>Name</label>
+        <input type="text" name="name" required />
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" name="email" required />
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" name="password" required />
+      </div>
+      <div class="auth-actions">
+        <button class="btn btn-primary" type="submit">Register</button>
+        <a class="btn btn-ghost" href="index.html">Back to site</a>
+      </div>
+      <p class="auth-message" id="registerMessage"></p>
+    </form>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
